@@ -1,0 +1,16 @@
+steps:
+  # Step 1: Deploy the Cloud Function
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'functions', 'deploy', 'ingest_posts',                # function name
+        '--runtime=python311',                                # your Python runtime
+        '--trigger-http',                                     # HTTP trigger
+        '--allow-unauthenticated',                           # allow public access (adjust if needed)
+        '--entry-point=ingest_posts',                         # Python function handler name
+        '--region=us-central1',                               # adjust region
+        '--source=.',                                        # deploy from current directory
+      ]
+
+timeout: '900s'   # 15 minutes timeout, adjust as needed
